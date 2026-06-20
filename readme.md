@@ -152,15 +152,6 @@ REST-APIs kommunizieren Ergebnisse über standardisierte HTTP-Statuscodes:
 
 
 
-```xml
-<dependency>
-    <groupId>io.javalin</groupId>
-    <artifactId>javalin</artifactId>
-    <version>7.2.2</version>
-</dependency>
-```
-
-
 ## Fazit
 
 REST-APIs sind der Grundbaustein moderner Webanwendungen und Microservices. Durch klare Konventionen, HTTP-Standards und Zustandslosigkeit sind sie leicht verständlich, skalierbar und gut wartbar. In Kombination mit Frameworks wie **Javalin** lassen sich RESTful APIs in Java schnell und übersichtlich umsetzen.
@@ -193,7 +184,7 @@ Beispiel‑Szenarien
 Dieses Projekt demonstriert HTTP‑Statuscodes mit einer kleinen Javalin‑REST‑API und einer interaktiven HTML‑Seite.
 
 Was neu ist
-- Interaktive Tutorial‑Seite: `/post-example.html` (nur HTML + JS). Dort kannst Du GET/POST/PUT/PATCH/DELETE ausprobieren.
+- Interaktive Tutorial‑Seite: `/example.html` (nur HTML + JS). Dort kannst Du GET/POST/PUT/PATCH/DELETE ausprobieren.
 - Die Tutorial‑Seite zeigt für jede Aktion eine Vorhersage (Predicted Status + Begründung) und nach Ausführung das tatsächliche Ergebnis (Actual Status + Body). So lernst Du Schritt für Schritt, wie HTTP‑Statuscodes zustande kommen.
 
 
@@ -205,3 +196,53 @@ Was neu ist
 ### Java
 - Java Version: 21 (LTS)
 - Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
+
+## Verwendete Abhängigkeiten
+In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`). Hier ist eine kurze Erklärung, warum sie gebraucht werden und welche Version konkret eingesetzt ist.
+
+- `io.javalin:javalin:7.2.2`
+  - Zweck: Leichtgewichtiges Web-Framework zum schnellen Erstellen von HTTP-Endpunkten und REST-APIs. Javalin bietet eine einfache API für Routing, Middleware, Request/Response-Handling und Serverseitiges Rendering.
+  - Warum diese Version: 7.2.2 ist die zum Projektzeitpunkt verwendete stabile Version. Javalin entwickelt sich aktiv weiter — bei Updates auf neue Major-Releases auf Breaking-Changes achten.
+  - Hinweise: Javalin nutzt intern einen Servlet-Container (standardmäßig Jetty) und ist für Lern- und Demo-Projekte ideal.
+
+```xml
+<dependency>
+    <groupId>io.javalin</groupId>
+    <artifactId>javalin</artifactId>
+    <version>7.2.2</version>
+</dependency>
+```
+
+- `org.slf4j:slf4j-simple:2.0.17`
+  - Zweck: SLF4J ist eine Logging-Abstraktion; `slf4j-simple` ist eine einfache, konsolenorientierte Implementierung von SLF4J. Sie schreibt Logs direkt auf stdout/stderr und ist einfach zu konfigurieren.
+  - Warum diese Version: 2.0.17 passt zur SLF4J-API-Version und ist für Demo- und Entwicklungszwecke ausreichend. In Produktionsprojekten empfiehlt sich eine robustere Implementierung (z. B. Logback) und eine konfigurierte Logging-Policy.
+```xml
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>2.0.17</version>
+</dependency>
+```
+- `com.fasterxml.jackson.core:jackson-databind:2.21.2`
+  - Zweck: JSON-Serialisierung und -Deserialisierung (Object ↔ JSON). Jackson wird verwendet, um Request-Bodies zu parsen und Java-Objekte als JSON zurückzugeben.
+  - Warum diese Version: 2.21.2 ist die im Projekt verwendete Version. Jackson erhält regelmäßig Sicherheitsupdates — bei produktivem Einsatz sollte man Security-Bulletins prüfen und zeitnah aktualisieren.
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.21.2</version>
+</dependency>
+```
+
+Kurz: Diese Abhängigkeiten sind absichtlich minimal gehalten — sie reichen für ein kleines Lernprojekt und ein interaktives Browser-Tutorial aus. Für grössere Projekte oder Produktionsempfehlungen siehe die jeweiligen Projektseiten und Sicherheits-Notes.
+
+Weitere Ressourcen
+- Javalin-Dokumentation: https://javalin.io/documentation
+- Jackson: https://github.com/FasterXML/jackson
+- SLF4J: https://www.slf4j.org/
+
+---
+
+Keywords
+
+REST, HTTP, HTTP-Statuscodes, Javalin, Java, CRUD, GET, POST, PUT, PATCH, DELETE, JSON, Jackson, SLF4J, Logging, Tutorial, API, Endpoint, Ressourcen, Zustandslosigkeit, Statuscode-Erklärung, 200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 500 Internal Server Error, 503 Service Unavailable, Content-Type, application/json, application/x-www-form-urlencoded, UTF-8, WordPress

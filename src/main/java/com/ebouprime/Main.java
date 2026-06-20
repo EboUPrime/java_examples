@@ -46,7 +46,7 @@ public class Main {
             homepage.append("<li><strong>PATCH /user/{id}</strong> — Partielle Änderung (200) oder 404</li>");
             homepage.append("<li><strong>DELETE /user/{id}</strong> — Löschen (204) oder 404</li>");
             homepage.append("</ul>");
-            homepage.append("<p class=\"meta\">Mehr Status‑Demos: <a href=\"/status/all\">/status/all</a></p>");
+            homepage.append("<p class=\"meta\">Weitere Status‑Demos sind über die einzelnen Endpunkte (z. B. /status/200) erreichbar.</p>");
             homepage.append("</div>\n</body>\n</html>");
 
             routes.get("/", ctx -> {
@@ -268,19 +268,6 @@ public class Main {
             routes.get("/status/502", ctx -> ctx.status(502).result("502 Bad Gateway"));
             routes.get("/status/503", ctx -> ctx.status(503).result("503 Service Unavailable"));
             routes.get("/status/504", ctx -> ctx.status(504).result("504 Gateway Timeout"));
-
-            // Aggregator: list all available status endpoints
-            routes.get("/status/all", ctx -> {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Available status endpoints:\n");
-                sb.append("/status/100 /status/101 /status/102 /status/103\n");
-                sb.append("/status/200 /status/201 /status/202 /status/204\n");
-                sb.append("/status/301 /status/302 /status/303 /status/304 /status/307 /status/308\n");
-                sb.append("/status/400 /status/401 /status/403 /status/404 /status/405 /status/409 /status/410 /status/422 /status/429\n");
-                sb.append("/status/500 /status/501 /status/502 /status/503 /status/504\n");
-                ctx.contentType("text/plain");
-                ctx.result(sb.toString());
-            });
 
         }).start(7070);
 
