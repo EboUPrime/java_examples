@@ -219,22 +219,6 @@ In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`).
 
 Kurz: Diese Abhängigkeiten sind absichtlich minimal gehalten — sie reichen für ein kleines Lernprojekt und ein interaktives Browser-Tutorial aus. Für grössere Projekte oder Produktionsempfehlungen siehe die jeweiligen Projektseiten und Sicherheits-Notes.
 
-Weitere Ressourcen
-- Javalin-Dokumentation: https://javalin.io/documentation
-- Jackson: https://github.com/FasterXML/jackson
-- SLF4J: https://www.slf4j.org/
-
----
-
-## Keywords
-
-REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging Tutorial API Endpoint Ressourcen Zustandslosigkeit Statuscode-Erklärung
-
-## Meta‑Description
-
-Interaktives, browserbasiertes Tutorial, das HTTP‑Methoden und Statuscodes erklärt – mit konkreten /user‑Beispielen (GET/POST/PUT/PATCH/DELETE), vorhergesagtem Status, tatsächlichem Response‑Body und schrittweiser Begründung.
-
-
 ---
 
 ## Schnellstart
@@ -256,4 +240,15 @@ Beispiel‑Szenarien
 - POST mit neuer ID + vollständigen Feldern → Predicted: 201 Created; Actual: 201 + JSON des neuen Users.
 - PUT auf bestehende ID mit vollständigen Feldern → Predicted: 200 OK; Actual: 200 + JSON.
 - DELETE auf bestehende ID → Predicted: 204 No Content; Actual: 204 (kein Body).
+
+
+---
+
+## Keywords
+
+REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging Tutorial API Endpoint Ressourcen Zustandslosigkeit Statuscode-Erklärung
+
+## Meta‑Description
+
+Interaktives, browserbasiertes Tutorial, das HTTP‑Methoden und Statuscodes erklärt – mit konkreten /user‑Beispielen (GET/POST/PUT/PATCH/DELETE), vorhergesagtem Status, tatsächlichem Response‑Body und schrittweiser Begründung.
 
