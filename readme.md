@@ -54,3 +54,11 @@ Füge die Javalin-Abhängigkeit in Deine `pom.xml` ein. Prüfe die aktuelle Vers
 mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 ```
 
+## Versionen
+### Javalin 7.2.2
+- Aktuelle Version: 7.2.2 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io/
+
+### Java
+- Java Version: 21 (LTS) 
+- Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
