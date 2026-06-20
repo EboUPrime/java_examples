@@ -23,8 +23,12 @@ import io.javalin.Javalin;
 
 public class Main {
     static void main(String[] args) {
-        Javalin app = Javalin.create().start(7070);
-        app.get("/", ctx -> ctx.result("Hello World"));
+        var app = Javalin.create(config -> {
+            config.routes.get("/", ctx -> ctx.result("Hello World"));
+        }).start(7070);
+        System.out.println("Server started on port 7070 ...");
+        System.out.println("Press Ctrl+C to stop the server.");
+        System.out.println("Visit http://localhost:7070 to see the result.");
     }
 }
 ```
@@ -36,9 +40,9 @@ Füge die Javalin-Abhängigkeit in Deine `pom.xml` ein. Prüfe die aktuelle Vers
 
 ```xml
 <dependency>
-  <groupId>io.javalin</groupId>
-  <artifactId>javalin</artifactId>
-  <version>5.x.x</version> <!-- aktuelle Version prüfen -->
+    <groupId>io.javalin</groupId>
+    <artifactId>javalin</artifactId>
+    <version>7.2.2</version>
 </dependency>
 ```
 
@@ -50,4 +54,3 @@ Füge die Javalin-Abhängigkeit in Deine `pom.xml` ein. Prüfe die aktuelle Vers
 mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 ```
 
-Viel Erfolg beim Entwickeln mit Javalin! Bei Bedarf kann ich die Readme noch um Hinweise zu Middleware, Routing-Buildern oder OpenAPI/Swagger UI erweitern.
