@@ -27,31 +27,30 @@ public class Main {
             }
             RoutesConfig routes = config.routes;
             StringBuilder homepage = new StringBuilder();
-            homepage.append("<div style=\"font-family: Arial, sans-serif; text-align: center; margin-top: 30px;\">");
-            homepage.append("<h1 style=\"color: #333;\">REST API mit Javalin</h1>");
-            homepage.append("<p style=\"color: #555; font-size: 16px;\">Demonstration von HTTP-Statuscodes und /user-Methoden</p>");
-            homepage.append("<div style=\"display: inline-block; text-align: left; margin-top: 16px; max-width: 800px;\">");
-            homepage.append("<h3 style=\"margin-bottom:6px;\">Status-Beispiele</h3>");
-            homepage.append("<p style=\"color: #333; font-size: 14px;\">Siehe: <a href=\"/status/all\">/status/all</a> (Liste aller Demo-Endpunkte)</p>");
-            homepage.append("<hr style=\"margin:8px 0;\">");
-            homepage.append("<h3 style=\"margin-bottom:6px;\">User-API Beispiele</h3>");
-            homepage.append("<ul style=\"color:#444;font-size:14px;line-height:1.4;\">");
-            homepage.append("<li><strong>GET /users</strong> alle Benutzer (200). <a href=\"/users\">/users</a></li>");
-            homepage.append("<li><strong>GET /user?id=1</strong> Benutzer per Query (200) oder Redirect auf /users wenn kein id</li>");
-            homepage.append("<li><strong>GET /user/1</strong> Benutzer per Path (200) oder 404 wenn nicht vorhanden</li>");
-            homepage.append("<li><strong>POST /user</strong> Erstellen: JSON oder form/x-www-form-urlencoded oder query. Rückgabe: 201 oder 409 bei Konflikt</li>");
-            homepage.append("<li><strong>PUT /user/{id}</strong> Ersetzen oder Erstellen (200 oder 201)</li>");
-            homepage.append("<li><strong>PATCH /user/{id}</strong> Partielle Aktualisierung (200 oder 404)</li>");
-            homepage.append("<li><strong>DELETE /user/{id}</strong> Löschen (204 oder 404)</li>");
+            homepage.append("<!doctype html>");
+            homepage.append("<html lang=\"de\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>REST API – Beispiele & HTTP‑Statuscodes</title>\n<style>");
+            homepage.append("body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;padding:24px;background:#f7f8fb;color:#222}");
+            homepage.append(".wrap{max-width:1000px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 6px 18px rgba(20,20,30,0.06)}");
+            homepage.append("h1{margin:0 0 8px 0;color:#10316b}");
+            homepage.append("p.lead{color:#555;margin-top:0}");
+            homepage.append("ul{padding-left:1.1rem}");
+            homepage.append("a.btn{display:inline-block;margin-top:8px;padding:8px 12px;border-radius:6px;background:#1066d5;color:#fff;text-decoration:none}");
+            homepage.append(".meta{font-size:13px;color:#666;margin-top:12px}");
+            homepage.append("</style>\n</head>\n<body>\n<div class=\"wrap\">\n<h1>REST API mit Javalin</h1>\n<p class=\"lead\">Demonstration von HTTP‑Statuscodes und einfachen Benutzer‑Beispielen. Interaktive Beispiele: <a class=\"btn\" href=\"/example.html\">Web‑Beispiele öffnen</a></p>\n<hr>");
+            homepage.append("<h2>Kurzübersicht</h2>\n<ul>");
+            homepage.append("<li><strong>GET /users</strong> — alle Benutzer (200). <a href=\"/users\">/users</a></li>");
+            homepage.append("<li><strong>GET /user?id=1</strong> — Benutzer per Query (200) / 404 wenn nicht vorhanden</li>");
+            homepage.append("<li><strong>GET /user/{id}</strong> — Benutzer per Pfad; JSON-Antwort (200) oder 404</li>");
+            homepage.append("<li><strong>POST /user</strong> — Erstellen (201) oder 409 bei Konflikt</li>");
+            homepage.append("<li><strong>PUT /user/{id}</strong> — Ersetzen (200) oder Erstellen (201)</li>");
+            homepage.append("<li><strong>PATCH /user/{id}</strong> — Partielle Änderung (200) oder 404</li>");
+            homepage.append("<li><strong>DELETE /user/{id}</strong> — Löschen (204) oder 404</li>");
             homepage.append("</ul>");
-            homepage.append("<h4 style=\"margin:6px 0 2px 0;\">Web‑Beispiele (nur HTML)</h4>");
-            homepage.append("<p style=\"color:#333;font-size:14px;\">Öffne die interaktive HTML‑Seite mit Formularen und Fetch‑Beispielen: <a href=\"/example.html\">/example.html</a></p>");
-            homepage.append("<p style=\"color:#666;font-size:12px;\">Weitere Demo‑Endpunkte: /user/unauthorized (401), /user/forbidden (403), /user/invalid (422), /user/error (500)</p>");
-            homepage.append("</div>");
-            homepage.append("</div>");
+            homepage.append("<p class=\"meta\">Mehr Status‑Demos: <a href=\"/status/all\">/status/all</a></p>");
+            homepage.append("</div>\n</body>\n</html>");
 
             routes.get("/", ctx -> {
-                ctx.contentType("text/html");
+                ctx.contentType("text/html; charset=utf-8");
                 ctx.result(homepage.toString());
             });
 

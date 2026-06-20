@@ -1,146 +1,146 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Web‑Beispiele: /user und Status</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; padding: 1rem; max-width: 900px; margin: auto; }
-        h1,h2 { color:#333 }
-        label { display:block; margin-top:.5rem }
-        input { width:100%; max-width:360px; padding:.4rem; margin-top:.2rem }
-        button, a.button-like { margin-top:.8rem; padding:.5rem 1rem; display:inline-block; text-decoration:none; color:inherit; border:1px solid #ccc; background:#fff; border-radius:4px; cursor:pointer }
-        .hint { margin-top:.8rem; color:#555 }
-        pre { background:#f6f6f6; padding:.6rem; border-radius:4px; overflow:auto }
-        .row { display:flex; gap:1rem; flex-wrap:wrap }
-        .card { border:1px solid #e0e0e0; padding:1rem; border-radius:6px; margin-top:1rem }
-        .result { margin-top:.6rem; padding:.6rem; background:#fff; border-radius:4px; border:1px dashed #ddd; white-space:pre-wrap }
-        .explain { margin-top:.5rem; font-size:13px; color:#333 }
-        .ok { color:green }
-        .bad { color:red }
+        :root{
+            --bg:#f5f7fb; --card:#ffffff; --muted:#6b7280; --accent:#0f62d0; --success:#107e3e; --danger:#b02a37;
+            --border: rgba(15,20,30,0.06);
+            --radius:10px; --gap:16px; --max:1100px;
+            font-family: Inter, 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+        html,body{height:100%;margin:0;background:var(--bg);color:#12202b}
+        .page{max-width:var(--max);margin:28px auto;padding:20px}
+        header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+        header h1{margin:0;font-size:1.6rem;color:#072a5f}
+        header p{margin:0;color:var(--muted)}
+        .wrap{display:block;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));border-radius:var(--radius);box-shadow:0 6px 20px rgba(16,24,40,0.06);padding:18px;border:1px solid var(--border)}
+        .lead{margin:10px 0;color:var(--muted)}
+        .controls-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:start}
+        @media (max-width:800px){.controls-grid{grid-template-columns:1fr}}
+        .card{background:var(--card);border-radius:8px;padding:14px;border:1px solid var(--border)}
+        .card h2{margin:0 0 8px 0;font-size:1.05rem;color:#0b3b6f}
+        label{display:block;font-size:.92rem;color:var(--muted);margin-top:8px}
+        input, select{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(10,15,25,0.06);box-shadow:none;margin-top:6px}
+        button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+        button.secondary{background:#fff;color:var(--accent);border:1px solid rgba(16,102,213,0.12)}
+        .row{display:flex;flex-wrap:wrap;gap:8px}
+        .button-like{display:inline-block;padding:8px 10px;border-radius:8px;background:#eef6ff;color:var(--accent);text-decoration:none;border:1px solid rgba(16,102,213,0.08)}
+        .result{margin-top:10px;padding:12px;background:#fbfdff;border-radius:8px;border:1px dashed rgba(12,18,34,0.04);white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;font-size:13px;color:#12202b}
+        .explain{margin-top:8px;font-size:13px;color:var(--muted);white-space:pre-wrap}
+        .meta{font-size:13px;color:var(--muted);margin-top:12px}
+        .status-badge{display:inline-block;padding:6px 8px;border-radius:999px;font-weight:600;font-size:12px;color:#fff}
+        .status-200{background:var(--success)}
+        .status-201{background:#0b7bd6}
+        .status-4xx{background:var(--danger)}
+        .status-5xx{background:#8a1538}
+        footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
     </style>
 </head>
 <body>
-<h1>Web‑Beispiele für die API</h1>
-<p>Diese Seite zeigt reine Web‑Beispiele (keine curl-Beispiele). Jede Aktion zeigt vor dem Senden eine Vorhersage (Predicted Status + Begründung) und nach der Antwort den tatsächlichen Status (Actual) sowie die Ableitung.</p>
-
-<div class="card">
-    <h2>GET /user?id=...</h2>
-    <p>Gib eine ID ein und sende das Formular (GET). Die Seite fragt vorab <code>/users</code> ab, um vorhandene IDs zu kennen und eine Vorhersage zu treffen.</p>
-    <form id="getForm" method="get" action="/user">
-        <label for="getId">ID</label>
-        <input id="getId" name="id" type="number" value="1" required>
-        <div style="margin-top:.6rem">
-            <button type="submit">GET /user?id=... (show inline)</button>
-            <button id="getNewTab" type="button">In neuem Tab öffnen</button>
+<div class="page">
+    <header>
+        <div>
+            <h1>Web‑Beispiele für die API</h1>
+            <p class="lead">Interaktive Beispiele zur Demonstration von HTTP‑Methoden und Statuscodes. Jede Aktion zeigt eine Vorhersage und das tatsächliche Ergebnis.</p>
         </div>
-    </form>
-    <div id="getResult" class="result">Noch keine Anfrage.</div>
-</div>
+        <div class="meta">Mehr Demos: <a class="button-like" href="/status/all">/status/all</a> <a class="button-like" href="/">Startseite</a></div>
+    </header>
 
-<div class="card">
-    <h2>POST /user (HTML‑Form oder JSON)</h2>
-    <p>Erstelle einen neuen Benutzer. Wähle das Format (Form oder JSON) und „Senden (inline)" um Vorhersage + Antwort hier zu sehen.</p>
-    <form id="postForm" method="post" action="/user">
-        <label for="postId">ID</label>
-        <input id="postId" name="id" type="number" value="2" required>
+    <div class="wrap">
+        <div class="controls-grid">
+            <div class="card">
+                <h2>GET /user?id=...</h2>
+                <p class="meta">Gib eine ID ein und teste per GET (ergebnis inline oder neuer Tab).</p>
+                <form id="getForm" method="get" action="/user">
+                    <label for="getId">ID</label>
+                    <input id="getId" name="id" type="number" value="1" required>
+                    <div style="margin-top:10px;display:flex;gap:8px">
+                        <button type="submit">GET (inline)</button>
+                        <button id="getNewTab" type="button" class="secondary">In neuem Tab</button>
+                    </div>
+                </form>
+                <div id="getResult" class="result">Noch keine Anfrage.</div>
+            </div>
 
-        <label for="postName">Name</label>
-        <input id="postName" name="name" type="text" value="Anna" required>
+            <div class="card">
+                <h2>POST /user</h2>
+                <p class="meta">Erstelle Benutzer per HTML‑Form oder JSON (inline Ergebnis).</p>
+                <form id="postForm" method="post" action="/user">
+                    <label for="postId">ID</label>
+                    <input id="postId" name="id" type="number" value="2" required>
+                    <label for="postName">Name</label>
+                    <input id="postName" name="name" type="text" value="Anna" required>
+                    <label for="postEmail">E‑Mail</label>
+                    <input id="postEmail" name="email" type="email" value="anna@example.com" required>
+                    <label style="margin-top:8px">Format</label>
+                    <div class="row">
+                        <label style="display:inline-flex;align-items:center"><input type="radio" name="postType" value="form" checked> &nbsp;Form</label>
+                        <label style="display:inline-flex;align-items:center"><input type="radio" name="postType" value="json"> &nbsp;JSON</label>
+                    </div>
+                    <div style="margin-top:10px;display:flex;gap:8px">
+                        <button id="postInline" type="button">POST (inline)</button>
+                        <button id="postNewTab" type="submit" class="secondary">POST (neuer Tab)</button>
+                    </div>
+                </form>
+                <div id="postResult" class="result">Noch keine Anfrage.</div>
+            </div>
 
-        <label for="postEmail">E‑Mail</label>
-        <input id="postEmail" name="email" type="email" value="anna@example.com" required>
+            <div class="card">
+                <h2>PUT / PATCH / DELETE</h2>
+                <p class="meta">Buttons senden PUT, PATCH und DELETE per Fetch; Resultat erscheint unten.</p>
+                <label for="modifyId">ID</label>
+                <input id="modifyId" type="number" value="2">
+                <div style="margin-top:10px;display:flex;gap:8px">
+                    <button id="putBtn">PUT</button>
+                    <button id="patchBtn" class="secondary">PATCH</button>
+                    <button id="deleteBtn" class="secondary">DELETE</button>
+                </div>
+                <div id="modifyResult" class="result" aria-live="polite">Keine Aktion ausgeführt.</div>
+            </div>
 
-        <div style="margin-top:.6rem">
-            <label><input type="radio" name="postType" value="form" checked> Form</label>
-            <label><input type="radio" name="postType" value="json"> JSON</label>
-        </div>
-
-        <div style="margin-top:.6rem">
-            <button id="postInline" type="button">POST /user (Senden, inline)</button>
-            <button id="postNewTab" type="submit">POST /user (Im neuen Tab)</button>
-        </div>
-    </form>
-    <div id="postResult" class="result">Noch keine Anfrage.</div>
-</div>
-
-<div class="card">
-    <h2>PUT /user/{id}, PATCH /user/{id}, DELETE /user/{id} (Web‑Buttons)</h2>
-    <p>Die folgenden Buttons verwenden Fetch‑API. Vor dem Senden wird <code>/users</code> abgefragt, um die Vorhersage zu erstellen.</p>
-
-    <label for="modifyId">ID</label>
-    <input id="modifyId" type="number" value="2">
-
-    <div style="margin-top:.6rem">
-        <button id="putBtn">PUT (ersetzen/erstellen)</button>
-        <button id="patchBtn">PATCH (partiell aktualisieren)</button>
-        <button id="deleteBtn">DELETE (löschen)</button>
-    </div>
-
-    <div id="modifyResult" class="result" aria-live="polite">Keine Aktion ausgeführt.</div>
-</div>
-
-<div class="card">
-    <h2>Status‑Links</h2>
-    <p>Direkte Links zu einigen Status‑Demos:</p>
-    <div class="row">
-        <a class="button-like" href="/status/200">/status/200</a>
-        <a class="button-like" href="/status/201">/status/201</a>
-        <a class="button-like" href="/status/204">/status/204</a>
-        <a class="button-like" href="/status/400">/status/400</a>
-        <a class="button-like" href="/status/404">/status/404</a>
-        <a class="button-like" href="/status/500">/status/500</a>
-        <a class="button-like" href="/status/all">/status/all</a>
-    </div>
-</div>
-
-<div class="card">
-    <h2>Tutorial: So kommst du zum HTTP‑Status</h2>
-    <p>Schritt für Schritt: Wähle eine Methode, ID‑Szenario und Payload‑Optionen, klicke <strong>Predict</strong> um eine begründete Vorhersage zu erhalten, und <strong>Run</strong> um die Anfrage auszuführen und das tatsächliche Ergebnis zu sehen.</p>
-
-    <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <div style="flex:1;min-width:280px">
-            <label for="tMethod">Methode</label>
-            <select id="tMethod">
-                <option>GET</option>
-                <option>POST</option>
-                <option>PUT</option>
-                <option>PATCH</option>
-                <option>DELETE</option>
-            </select>
-
-            <label for="tId">ID (Zahl)</label>
-            <input id="tId" type="number" value="2">
-
-            <label><input id="tUseExisting" type="checkbox"> ID aus existierenden Benutzern wählen (falls vorhanden)</label>
-
-            <label>Payload‑Szenario</label>
-            <select id="tPayload">
-                <option value="full">Vollständige Felder (id, name, email)</option>
-                <option value="missing">Fehlende Felder (z.B. fehlendes email)</option>
-                <option value="none">Kein Body</option>
-            </select>
-
-            <label>Content‑Type (bei POST/PUT/PATCH)</label>
-            <select id="tType">
-                <option value="json">application/json</option>
-                <option value="form">application/x-www-form-urlencoded</option>
-            </select>
-
-            <div style="margin-top:.6rem">
-                <button id="tPredict">Predict</button>
-                <button id="tRun">Run</button>
+            <div class="card">
+                <h2>Tutorial: Vorhersage & Ausführung</h2>
+                <p class="meta">Wähle Methode, ID und Payload‑Szenario, klicke <strong>Predict</strong> und dann <strong>Run</strong>.</p>
+                <label for="tMethod">Methode</label>
+                <select id="tMethod">
+                    <option>GET</option>
+                    <option>POST</option>
+                    <option>PUT</option>
+                    <option>PATCH</option>
+                    <option>DELETE</option>
+                </select>
+                <label for="tId">ID (Zahl)</label>
+                <input id="tId" type="number" value="2">
+                <label style="margin-top:8px"><input id="tUseExisting" type="checkbox"> &nbsp;ID aus existierenden Benutzern wählen</label>
+                <label>Payload‑Szenario</label>
+                <select id="tPayload">
+                    <option value="full">Vollständig (id,name,email)</option>
+                    <option value="missing">Fehlende Felder</option>
+                    <option value="none">Kein Body</option>
+                </select>
+                <label>Content‑Type</label>
+                <select id="tType"><option value="json">application/json</option><option value="form">application/x-www-form-urlencoded</option></select>
+                <div style="margin-top:10px;display:flex;gap:8px">
+                    <button id="tPredict">Predict</button>
+                    <button id="tRun" class="secondary">Run</button>
+                </div>
+                <div id="tPredicted" class="result">Predicted erscheint hier.</div>
+                <div id="tActual" class="result" style="margin-top:8px">Actual erscheint hier.</div>
+                <div id="tSteps" class="explain">Schritte erscheinen hier.</div>
             </div>
         </div>
 
-        <div style="flex:2;min-width:300px">
-            <div class="result" id="tPredicted">Vorhersage erscheint hier.</div>
-            <div class="result" id="tActual" style="margin-top:.6rem">Tatsächliches Ergebnis erscheint hier.</div>
-            <div class="explain" id="tSteps" style="margin-top:.6rem"></div>
-        </div>
+        <footer>
+            <p>Weitere Demo‑Endpunkte: <a class="button-like" href="/user/unauthorized">/user/unauthorized</a>
+            <a class="button-like" href="/user/forbidden">/user/forbidden</a>
+            <a class="button-like" href="/user/invalid">/user/invalid</a>
+            <a class="button-like" href="/user/error">/user/error</a></p>
+            <p style="margin-top:6px;color:var(--muted)">Dieses Tutorial nutzt die gleichen Regeln wie die Server‑Implementierung (<code>Main.java</code>).</p>
+        </footer>
     </div>
-
-    <p class="hint">Die Vorhersage basiert auf den Regeln, die in der Server‑Implementierung (`Main.java`) definiert sind. Die Seite fragt dazu <code>/users</code> ab, um zu wissen, welche IDs aktuell existieren.</p>
 </div>
 
 <script>
