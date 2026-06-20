@@ -16,19 +16,16 @@ public class Main {
         Javalin app = Javalin.create(config -> {
             RoutesConfig routes = config.routes;
             StringBuilder homepage = new StringBuilder();
-            homepage.append("REST API with Javalin");
-            // Beispiel des HTTP-Statuscodes 200
-            homepage.append("\n");
-            homepage.append("HTTP-Codes");
-            homepage.append("\n");
-            homepage.append("200 OK");
-            homepage.append("\nhttp://localhost:7070/users");
-            homepage.append("\nThis Example fetches all users from the API");
-            homepage.append("\n");
-            homepage.append("201 Created");
-            homepage.append("\nhttp://localhost:7070/user?id=1&name=givara&email=test@ebouprime.com");
-
+            homepage.append("<div style=\"font-family: Arial, sans-serif; text-align: center; margin-top: 50px;\">");
+            homepage.append("<h1 style=\"color: #333;\">REST API with Javalin</h1>");
+            homepage.append("<p style=\"color: #555; font-size: 18px;\">HTTP-Codes</p>");
+            homepage.append("<div style=\"display: inline-block; text-align: left; margin-top: 20px;\">");
+            homepage.append("<p style=\"color: #555; font-size: 16px;\"><strong>200 OK</strong><br>http://localhost:7070/users<br>This Example fetches all users from the API</p>");
+            homepage.append("<p style=\"color: #555; font-size: 16px;\"><strong>201 Created</strong><br>http://localhost:7070/user<br>http://localhost:7070/user?id=1&name=givara&email=test@ebouprime.com <br>This Example creates a new user in the API</p>");
+            homepage.append("</div>");
+            homepage.append("</div>");
             routes.get("/", ctx -> {
+                ctx.contentType("text/html");
                 ctx.result(homepage.toString());
             });
             routes.get("/users", ctx -> {
