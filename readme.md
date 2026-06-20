@@ -156,46 +156,29 @@ REST-APIs kommunizieren Ergebnisse über standardisierte HTTP-Statuscodes:
 
 REST-APIs sind der Grundbaustein moderner Webanwendungen und Microservices. Durch klare Konventionen, HTTP-Standards und Zustandslosigkeit sind sie leicht verständlich, skalierbar und gut wartbar. In Kombination mit Frameworks wie **Javalin** lassen sich RESTful APIs in Java schnell und übersichtlich umsetzen.
 
----
-
-## Schnellstart
-- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
-- Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
-
-Wie das Tutorial funktioniert
-1) Öffne `/example.html` im Browser.
-2) Im Tutorial‑Abschnitt wählst Du:
-    - Methode (GET/POST/PUT/PATCH/DELETE)
-    - ID (oder die Option, eine existierende ID automatisch zu wählen)
-    - Payload‑Szenario: `full` (vollständige Felder), `missing` (fehlende Felder), `none` (kein Body)
-    - Content‑Type: `application/json` oder `application/x-www-form-urlencoded` (für POST/PUT/PATCH)
-3) Klicke `Predict` — die Seite fragt `/users` und zeigt eine begründete Vorhersage (z. B. 201, 409, 404) sowie die Schritte, wie die Vorhersage entsteht.
-4) Klicke `Run` — die Anfrage wird ausgeführt, und du erhältst den tatsächlichen HTTP‑Status und die Antwort (Actual). Vergleiche Predicted vs Actual.
-
-Beispiel‑Szenarien
-- POST mit bereits vorhandener ID → Predicted: 409 Conflict; Actual: 409 + Text "User with id X already exists".
-- POST mit neuer ID + vollständigen Feldern → Predicted: 201 Created; Actual: 201 + JSON des neuen Users.
-- PUT auf bestehende ID mit vollständigen Feldern → Predicted: 200 OK; Actual: 200 + JSON.
-- DELETE auf bestehende ID → Predicted: 204 No Content; Actual: 204 (kein Body).
-
-
-## Schnellstart (Browser‑Tutorial)
-
 Dieses Projekt demonstriert HTTP‑Statuscodes mit einer kleinen Javalin‑REST‑API und einer interaktiven HTML‑Seite.
 
-Was neu ist
-- Interaktive Tutorial‑Seite: `/example.html` (nur HTML + JS). Dort kannst Du GET/POST/PUT/PATCH/DELETE ausprobieren.
-- Die Tutorial‑Seite zeigt für jede Aktion eine Vorhersage (Predicted Status + Begründung) und nach Ausführung das tatsächliche Ergebnis (Actual Status + Body). So lernst Du Schritt für Schritt, wie HTTP‑Statuscodes zustande kommen.
 
 
 ## Versionen
-### Javalin 7.2.2
-- Aktuelle Version: 7.2.2 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io/
 
 ### Java
 - Java Version: 21 (LTS)
 - Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
+
+### Javalin 7.2.2
+- Aktuelle Version: 7.2.2 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io
+- 
+### slf4j-simple
+- Aktuelle Version: 2.0.17 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen SLF4J-Website: https://www.slf4j.org
+
+### Jackson Databind
+- Aktuelle Version: 2.21.2 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen Jackson-Website: https://www.tutorialspoint.com/jackson/jackson_data_binding.htm
+
+
 
 ## Verwendete Abhängigkeiten
 In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`). Hier ist eine kurze Erklärung, warum sie gebraucht werden und welche Version konkret eingesetzt ist.
@@ -246,3 +229,28 @@ Weitere Ressourcen
 Keywords
 
 REST, HTTP, HTTP-Statuscodes, Javalin, Java, CRUD, GET, POST, PUT, PATCH, DELETE, JSON, Jackson, SLF4J, Logging, Tutorial, API, Endpoint, Ressourcen, Zustandslosigkeit, Statuscode-Erklärung, 200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 500 Internal Server Error, 503 Service Unavailable, Content-Type, application/json, application/x-www-form-urlencoded, UTF-8, WordPress
+
+
+
+---
+
+## Schnellstart
+- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
+- Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
+
+Wie das Tutorial funktioniert
+1) Öffne `/example.html` im Browser.
+2) Im Tutorial‑Abschnitt wählst Du:
+    - Methode (GET/POST/PUT/PATCH/DELETE)
+    - ID (oder die Option, eine existierende ID automatisch zu wählen)
+    - Payload‑Szenario: `full` (vollständige Felder), `missing` (fehlende Felder), `none` (kein Body)
+    - Content‑Type: `application/json` oder `application/x-www-form-urlencoded` (für POST/PUT/PATCH)
+3) Klicke `Predict` — die Seite fragt `/users` und zeigt eine begründete Vorhersage (z. B. 201, 409, 404) sowie die Schritte, wie die Vorhersage entsteht.
+4) Klicke `Run` — die Anfrage wird ausgeführt, und du erhältst den tatsächlichen HTTP‑Status und die Antwort (Actual). Vergleiche Predicted vs Actual.
+
+Beispiel‑Szenarien
+- POST mit bereits vorhandener ID → Predicted: 409 Conflict; Actual: 409 + Text "User with id X already exists".
+- POST mit neuer ID + vollständigen Feldern → Predicted: 201 Created; Actual: 201 + JSON des neuen Users.
+- PUT auf bestehende ID mit vollständigen Feldern → Predicted: 200 OK; Actual: 200 + JSON.
+- DELETE auf bestehende ID → Predicted: 204 No Content; Actual: 204 (kein Body).
+
