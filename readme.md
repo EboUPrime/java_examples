@@ -23,8 +23,12 @@ import io.javalin.Javalin;
 
 public class Main {
     static void main(String[] args) {
-        Javalin app = Javalin.create().start(7070);
-        app.get("/", ctx -> ctx.result("Hello World"));
+        var app = Javalin.create(config -> {
+            config.routes.get("/", ctx -> ctx.result("Hello World"));
+        }).start(7070);
+        System.out.println("Server started on port 7070 ...");
+        System.out.println("Press Ctrl+C to stop the server.");
+        System.out.println("Visit http://localhost:7070 to see the result.");
     }
 }
 ```
@@ -115,14 +119,12 @@ public class UserApi {
             ctx.status(201).json(user);
         });
 
-        // Benutzer löschen
-        app.delete("/users/{id}", ctx -> {
-            int id = Integer.parseInt(ctx.pathParam("id"));
-            UserService.delete(id);
-            ctx.status(204);
-        });
-    }
-}
+```xml
+<dependency>
+    <groupId>io.javalin</groupId>
+    <artifactId>javalin</artifactId>
+    <version>7.2.2</version>
+</dependency>
 ```
 
 ## Best Practices
@@ -140,10 +142,18 @@ REST-APIs sind der Grundbaustein moderner Webanwendungen und Microservices. Durc
 ---
 
 ## Schnellstart
-- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen oder `UserApi` als Beispiel starten.
+- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
 - Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
 
 ```bash
 mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 ```
 
+## Versionen
+### Javalin 7.2.2
+- Aktuelle Version: 7.2.2 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io/
+
+### Java
+- Java Version: 21 (LTS) 
+- Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
