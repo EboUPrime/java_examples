@@ -226,10 +226,13 @@ Weitere Ressourcen
 
 ---
 
-Keywords
+## Keywords
 
-REST, HTTP, HTTP-Statuscodes, Javalin, Java, CRUD, GET, POST, PUT, PATCH, DELETE, JSON, Jackson, SLF4J, Logging, Tutorial, API, Endpoint, Ressourcen, Zustandslosigkeit, Statuscode-Erklärung, 200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 500 Internal Server Error, 503 Service Unavailable, Content-Type, application/json, application/x-www-form-urlencoded, UTF-8, WordPress
+REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging Tutorial API Endpoint Ressourcen Zustandslosigkeit Statuscode-Erklärung
 
+## Meta‑Description
+
+Interaktives, browserbasiertes Tutorial, das HTTP‑Methoden und Statuscodes erklärt – mit konkreten /user‑Beispielen (GET/POST/PUT/PATCH/DELETE), vorhergesagtem Status, tatsächlichem Response‑Body und schrittweiser Begründung.
 
 
 ---
