@@ -101,23 +101,29 @@ import io.javalin.Javalin;
 
 public class UserApi {
     static void main(String[] args) {
-        Javalin app = Javalin.create().start(7070);
+        Javalin app = Javalin.create(
+            config -> {
+                config.routes.get("/users", ctx -> ctx.json(UserService.getAll()));
+                config.routes.get("/users/{id}", ctx -> {
+                    int id = Integer.parseInt(ctx.pathParam("id"));
+                    ctx.json(UserService.getById(id));
+                });
+                config.routes.post("/users", ctx -> {
+                    User user = ctx.bodyAsClass(User.class);
+                    UserService.create(user);
+                    ctx.status(201).json(user);
+                });
+                config.delete("/users/{id}", ctx -> {
+                    int id = Integer.parseInt(ctx.pathParam("id"));
+                    UserService.delete(id);
+                    ctx.status(204);
+                });
+            }
+        ).start(7070);
+    }
+}
 
-        // Alle Benutzer abrufen
-        app.get("/users", ctx -> ctx.json(UserService.getAll()));
-
-        // Einzelnen Benutzer abrufen
-        app.get("/users/{id}", ctx -> {
-            int id = Integer.parseInt(ctx.pathParam("id"));
-            ctx.json(UserService.getById(id));
-        });
-
-        // Neuen Benutzer erstellen
-        app.post("/users", ctx -> {
-            User user = ctx.bodyAsClass(User.class);
-            UserService.create(user);
-            ctx.status(201).json(user);
-        });
+```
 
 ```xml
 <dependency>
