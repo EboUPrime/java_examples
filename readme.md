@@ -1,6 +1,7 @@
 # REST-APIs mit Javalin
 
 [API-Dokumentation](https://javalin.io/documentation)
+[GitHub-Repository](https://github.com/EboUPrime/java_examples/tree/REST_APIs__HTTP-Statuscodes)
 
 
 
@@ -170,9 +171,31 @@ REST-APIs sind der Grundbaustein moderner Webanwendungen und Microservices. Durc
 - Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
 - Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
 
-```bash
-mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
-```
+Wie das Tutorial funktioniert
+1) Öffne `/example.html` im Browser.
+2) Im Tutorial‑Abschnitt wählst Du:
+    - Methode (GET/POST/PUT/PATCH/DELETE)
+    - ID (oder die Option, eine existierende ID automatisch zu wählen)
+    - Payload‑Szenario: `full` (vollständige Felder), `missing` (fehlende Felder), `none` (kein Body)
+    - Content‑Type: `application/json` oder `application/x-www-form-urlencoded` (für POST/PUT/PATCH)
+3) Klicke `Predict` — die Seite fragt `/users` und zeigt eine begründete Vorhersage (z. B. 201, 409, 404) sowie die Schritte, wie die Vorhersage entsteht.
+4) Klicke `Run` — die Anfrage wird ausgeführt, und du erhältst den tatsächlichen HTTP‑Status und die Antwort (Actual). Vergleiche Predicted vs Actual.
+
+Beispiel‑Szenarien
+- POST mit bereits vorhandener ID → Predicted: 409 Conflict; Actual: 409 + Text "User with id X already exists".
+- POST mit neuer ID + vollständigen Feldern → Predicted: 201 Created; Actual: 201 + JSON des neuen Users.
+- PUT auf bestehende ID mit vollständigen Feldern → Predicted: 200 OK; Actual: 200 + JSON.
+- DELETE auf bestehende ID → Predicted: 204 No Content; Actual: 204 (kein Body).
+
+
+## Schnellstart (Browser‑Tutorial)
+
+Dieses Projekt demonstriert HTTP‑Statuscodes mit einer kleinen Javalin‑REST‑API und einer interaktiven HTML‑Seite.
+
+Was neu ist
+- Interaktive Tutorial‑Seite: `/post-example.html` (nur HTML + JS). Dort kannst Du GET/POST/PUT/PATCH/DELETE ausprobieren.
+- Die Tutorial‑Seite zeigt für jede Aktion eine Vorhersage (Predicted Status + Begründung) und nach Ausführung das tatsächliche Ergebnis (Actual Status + Body). So lernst Du Schritt für Schritt, wie HTTP‑Statuscodes zustande kommen.
+
 
 ## Versionen
 ### Javalin 7.2.2
@@ -180,5 +203,5 @@ mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 - Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io/
 
 ### Java
-- Java Version: 21 (LTS) 
+- Java Version: 21 (LTS)
 - Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
