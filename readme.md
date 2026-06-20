@@ -1,21 +1,10 @@
-# Javalin
+# REST-APIs mit Javalin
 
-[Javalin](https://javalin.io/) — Ein leichtgewichtiges Web-Framework für Java
+[API-Dokumentation](https://javalin.io/documentation)
 
-## Ein kurzer Überblick
-Javalin ist ein minimalistisches Java-Framework für Webanwendungen und REST-APIs. Es setzt auf Einfachheit, gute Performance und eine kleine, leicht verständliche API, die sich besonders für Microservices, Prototypen und kleine bis mittelgroße Webanwendungen eignet.
 
-## Was ist Javalin?
-Javalin basiert auf dem Jetty-Webserver und versucht, Entwickler durch eine flache API-Oberfläche schnell produktiv zu machen. Statt komplexer Vererbungsstrukturen oder vieler Konfigurationen bietet Javalin eine direkte, pragmatische Herangehensweise an Routing, Middleware und API-Dokumentation.
 
-## Vorteile von Javalin
-
-- Einfachheit: Sehr geringer Einstieg: keine abstrakten Basisklassen oder umfangreiche Konfigurationen nötig.
-- Leichtgewichtig & performant: Kleine Codebasis, direkte Nutzung von Jetty für gute Laufzeit-Eigenschaften.
-- Flexibilität: Synchroner Standardbetrieb mit einfacher Möglichkeit zur asynchronen Verarbeitung.
-- OpenAPI-Integration: Unterstützung für OpenAPI/Swagger zur einfachen API-Dokumentation.
-
-## Beispiel: Einfacher Java‑Webserver
+## Einfacher Java‑Webserver
 Das folgende Minimalbeispiel zeigt, wie man mit wenigen Zeilen einen HTTP-Endpunkt bereitstellt:
 
 ```java
@@ -46,6 +35,8 @@ REST (Representational State Transfer) ist ein Architekturstil für die Kommunik
 ## Was ist REST?
 
 REST wurde von Roy Fielding im Jahr 2000 in seiner Dissertation definiert. Es handelt sich nicht um ein Protokoll, sondern um einen **Architekturstil**, der auf dem HTTP-Protokoll aufbaut. Eine API, die den REST-Prinzipien folgt, nennt man **RESTful API**.
+
+- [Roy Fielding](https://en.wikipedia.org/wiki/Roy_Fielding)
 
 ## Die 6 REST-Prinzipien
 
@@ -93,37 +84,72 @@ REST-APIs kommunizieren Ergebnisse über standardisierte HTTP-Statuscodes:
 | 403  | Forbidden – Kein Zugriff     |
 | 404  | Not Found – Ressource nicht gefunden |
 | 500  | Internal Server Error        |
+| 503  | Service Unavailable          |
 
-## Beispiel: REST-API in Java mit Javalin
+## Statuscodes Responsefälle
+- **200 OK**: Die Anfrage war erfolgreich und die Antwort enthält die angeforderten Daten.
+    - GET /users/1 → 200 OK + Benutzerinformationen
+    - POST /user → 200 OK + Erstellte Benutzerinformationen
+    - PUT /users/1 → 200 OK + Aktualisierte Benutzerinformationen
+    - PATCH /users/1 → 200 OK + Aktualisierte Benutzerinformationen
+    - DELETE /users/1 → 200 OK + Bestätigung der Löschung
+- **201 Created**: Die Anfrage war erfolgreich und eine neue Ressource wurde erstellt.
+    - POST /user → 201 Created + URI der neuen Ressource
+    - PUT /users/1 → 201 Created + URI der neuen Ressource (wenn die Ressource vorher nicht existierte)
+- **204 No Content**: Die Anfrage war erfolgreich, aber es gibt keine Daten zurückzugeben.
+    - DELETE /users/1 → 204 No Content (wenn die Ressource erfolgreich gelöscht wurde)
+    - PUT /users/1 → 204 No Content (wenn die Ressource erfolgreich aktualisiert wurde und keine Daten zurückgegeben werden)
+    - PATCH /users/1 → 204 No Content (wenn die Ressource erfolgreich aktualisiert wurde und keine Daten zurückgegeben werden)
+    - GET /users/1 → 204 No Content (wenn die Ressource existiert, aber keine Daten zurückgegeben werden sollen)
+    - POST /user → 204 No Content (wenn die Ressource erfolgreich erstellt wurde und keine Daten zurückgegeben werden)
+- **400 Bad Request**: Die Anfrage war ungültig oder konnte nicht verarbeitet werden.
+    - POST /user → 400 Bad Request (wenn erforderliche Felder fehlen)
+    - PUT /users/1 → 400 Bad Request (wenn die Anfrage ungültig ist)
+    - PATCH /users/1 → 400 Bad Request (wenn die Anfrage ungültig ist)
+- **401 Unauthorized**: Der Client ist nicht authentifiziert.
+    - GET /users/1 → 401 Unauthorized (wenn Authentifizierung erforderlich ist)
+    - POST /user → 401 Unauthorized (wenn Authentifizierung erforderlich ist)
+    - PUT /users/1 → 401 Unauthorized (wenn Authentifizierung erforderlich ist)
+    - PATCH /users/1 → 401 Unauthorized (wenn Authentifizierung erforderlich ist)
+    - DELETE /users/1 → 401 Unauthorized (wenn Authentifizierung erforderlich ist)
+- **403 Forbidden**: Der Client hat keine Berechtigung, auf die Ressource zuzugreifen.
+    - GET /users/1 → 403 Forbidden (wenn der Client nicht die erforderlichen Berechtigungen hat)
+    - POST /user → 403 Forbidden (wenn der Client nicht die erforderlichen Berechtigungen hat)
+    - PUT /users/1 → 403 Forbidden (wenn der Client nicht die erforderlichen Berechtigungen hat)
+    - PATCH /users/1 → 403 Forbidden (wenn der Client nicht die erforderlichen Berechtigungen hat)
+    - DELETE /users/1 → 403 Forbidden (wenn der Client nicht die erforderlichen Berechtigungen hat)
+- **404 Not Found**: Die angeforderte Ressource wurde nicht gefunden.
+    - GET /users/999 → 404 Not Found (wenn der Benutzer mit ID 999 nicht existiert)
+    - PUT /users/999 → 404 Not Found (wenn der Benutzer mit ID 999 nicht existiert)
+    - PATCH /users/999 → 404 Not Found (wenn der Benutzer mit ID 999 nicht existiert)
+    - DELETE /users/999 → 404 Not Found (wenn der Benutzer mit ID 999 nicht existiert)
+- **500 Internal Server Error**: Ein unerwarteter Fehler ist auf dem Server aufgetreten.
+    - GET /users/1 → 500 Internal Server Error (wenn ein Fehler bei der Verarbeitung der Anfrage auftritt)
+    - POST /users → 500 Internal Server Error (wenn ein Fehler bei der Verarbeitung der Anfrage auftritt)
+    - PUT /users/1 → 500 Internal Server Error (wenn ein Fehler bei der Verarbeitung der Anfrage auftritt)
+    - PATCH /users/1 → 500 Internal Server Error (wenn ein Fehler bei der Verarbeitung der Anfrage auftritt)
+- **503 Service Unavailable**: Der Server ist derzeit nicht verfügbar (z. B. wegen Wartungsarbeiten).
+    - GET /users/1 → 503 Service Unavailable (wenn der Server vorübergehend nicht erreichbar ist)
+    - POST /users → 503 Service Unavailable (wenn der Server vorübergehend nicht erreichbar ist)
+    - PUT /users/1 → 503 Service Unavailable (wenn der Server vorübergehend nicht erreichbar ist)
+    - PATCH /users/1 → 503 Service Unavailable (wenn der Server vorübergehend nicht erreichbar ist)
 
-```java
-import io.javalin.Javalin;
+## Unterschiede
+### zwischen 200 OK und 204 No Content
+- **200 OK**: Die Anfrage war erfolgreich und die Antwort enthält die angeforderten Daten. Zum Beispiel, wenn ein Benutzer erfolgreich erstellt oder aktualisiert wurde, könnte die Antwort die Details des Benutzers enthalten.
+- **204 No Content**: Die Anfrage war erfolgreich, aber es gibt keine Daten zurückzugeben. Dies wird oft verwendet, wenn eine Ressource erfolgreich gelöscht wurde oder wenn eine Aktualisierung erfolgreich war, aber keine weiteren Informationen zurückgegeben werden müssen.
 
-public class UserApi {
-    static void main(String[] args) {
-        Javalin app = Javalin.create(
-            config -> {
-                config.routes.get("/users", ctx -> ctx.json(UserService.getAll()));
-                config.routes.get("/users/{id}", ctx -> {
-                    int id = Integer.parseInt(ctx.pathParam("id"));
-                    ctx.json(UserService.getById(id));
-                });
-                config.routes.post("/users", ctx -> {
-                    User user = ctx.bodyAsClass(User.class);
-                    UserService.create(user);
-                    ctx.status(201).json(user);
-                });
-                config.delete("/users/{id}", ctx -> {
-                    int id = Integer.parseInt(ctx.pathParam("id"));
-                    UserService.delete(id);
-                    ctx.status(204);
-                });
-            }
-        ).start(7070);
-    }
-}
+### zwischen 201 Created und 204 No Content
+- **201 Created**: Die Anfrage war erfolgreich und eine neue Ressource wurde erstellt. In diesem Fall sollte die Antwort die URI der neu erstellten Ressource enthalten, damit der Client sie direkt aufrufen kann.
+- **204 No Content**: Die Anfrage war erfolgreich, aber es gibt keine Daten zurückzugeben. Dies wird oft verwendet, wenn eine Ressource erfolgreich gelöscht wurde oder wenn eine Aktualisierung erfolgreich war, aber keine weiteren Informationen zurückgegeben werden müssen.
 
-```
+### zwischen 400 Bad Request, 401 Unauthorized und 403 Forbidden
+- **400 Bad Request**: Die Anfrage war ungültig oder konnte nicht verarbeitet werden. Dies könnte passieren, wenn erforderliche Felder fehlen oder die Daten ungültig sind.
+- **401 Unauthorized**: Der Client ist nicht authentifiziert. Dies bedeutet, dass der Client keine gültigen Anmeldeinformationen bereitgestellt hat oder die Anmeldeinformationen ungültig sind.
+- **403 Forbidden**: Der Client hat keine Berechtigung, auf die Ressource zuzugreifen. Dies bedeutet, dass der Client zwar authentifiziert ist, aber nicht die erforderlichen Berechtigungen hat, um auf die Ressource zuzugreifen.
+
+
+
 
 ```xml
 <dependency>
@@ -133,13 +159,6 @@ public class UserApi {
 </dependency>
 ```
 
-## Best Practices
-
-- **Ressourcennamen im Plural** verwenden: `/users` statt `/user`
-- **Versionierung** der API: `/api/v1/users`
-- **JSON** als Standardformat für Anfrage- und Antwort-Body
-- **Authentifizierung** via JWT oder OAuth 2.0
-- **API-Dokumentation** mit OpenAPI/Swagger
 
 ## Fazit
 
