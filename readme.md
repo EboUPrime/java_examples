@@ -1,7 +1,7 @@
 
 # Simple Logging Facade for Java (SLF4J)
 
-[link](https://www.slf4j.org)
+[SLF4J](https://www.slf4j.org)
 
 slf4j ist eine Schnittstelle für verschiedene Logging-Frameworks (z.B. Log4j, java.util.logging, Logback)
 ermöglicht es, das Logging-Framework zur Laufzeit auszuwählen, ohne den Code zu ändern
@@ -37,6 +37,7 @@ In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`).
 - `org.slf4j:slf4j-simple:2.0.17`
     - Zweck: SLF4J ist eine Logging-Abstraktion; `slf4j-simple` ist eine einfache, konsolenorientierte Implementierung von SLF4J. Sie schreibt Logs direkt auf stdout/stderr und ist einfach zu konfigurieren.
     - Warum diese Version: 2.0.17 passt zur SLF4J-API-Version und ist für Demo- und Entwicklungszwecke ausreichend. In Produktionsprojekten empfiehlt sich eine robustere Implementierung (z. B. Logback) und eine konfigurierte Logging-Policy.
+
 ```xml
 <dependency>
     <groupId>org.slf4j</groupId>
