@@ -35,24 +35,6 @@ public class Main {
 
 Dieses Beispiel startet einen Server auf Port 7070 und beantwortet GET-Anfragen an `/` mit dem Text "Hello World".
 
-## Maven-Dependency (Beispiel)
-Füge die Javalin-Abhängigkeit in Deine `pom.xml` ein. Prüfe die aktuelle Version auf https://javalin.io/ oder in Maven Central.
-
-```xml
-<dependency>
-    <groupId>io.javalin</groupId>
-    <artifactId>javalin</artifactId>
-    <version>7.2.2</version>
-</dependency>
-```
-
-## Schnellstart
-- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
-- Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
-
-```bash
-mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
-```
 
 ## Versionen
 
@@ -62,4 +44,32 @@ mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 
 ### Javalin 7.2.2
 - Aktuelle Version: 7.2.2 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io/
+- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io
+
+
+## Verwendete Abhängigkeiten
+
+In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`). Hier ist eine kurze Erklärung, warum sie gebraucht werden und welche Version konkret eingesetzt ist.
+
+- `io.javalin:javalin:7.2.2`
+    - Zweck: Leichtgewichtiges Web-Framework zum schnellen Erstellen von HTTP-Endpunkten und REST-APIs. Javalin bietet eine einfache API für Routing, Middleware, Request/Response-Handling und Serverseitiges Rendering.
+    - Warum diese Version: 7.2.2 ist die zum Projektzeitpunkt verwendete stabile Version. Javalin entwickelt sich aktiv weiter — bei Updates auf neue Major-Releases auf Breaking-Changes achten.
+    - Hinweise: Javalin nutzt intern einen Servlet-Container (standardmäßig Jetty) und ist für Lern- und Demo-Projekte ideal.
+
+```xml
+<dependency>
+    <groupId>io.javalin</groupId>
+    <artifactId>javalin</artifactId>
+    <version>7.2.2</version>
+</dependency>
+```
+
+
+
+## Schnellstart
+- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
+- Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
+
+```bash
+mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
+```
