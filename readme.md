@@ -1,7 +1,7 @@
 
 # Simple Logging Facade for Java (SLF4J)
 
-[SLF4J](https://www.slf4j.org)
+[SLF4J](https://www.slf4j.org) | [GitHub Repository](https://github.com/EboUPrime/java_examples/tree/slf4j)
 
 slf4j ist eine Schnittstelle für verschiedene Logging-Frameworks (z.B. Log4j, java.util.logging, Logback)
 ermöglicht es, das Logging-Framework zur Laufzeit auszuwählen, ohne den Code zu ändern
