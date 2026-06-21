@@ -1,75 +1,46 @@
-# Javalin
 
-[Javalin](https://javalin.io/) — Ein leichtgewichtiges Web-Framework für Java
+# Simple Logging Facade for Java (SLF4J)
 
-## Ein kurzer Überblick
-Javalin ist ein minimalistisches Java-Framework für Webanwendungen und REST-APIs. Es setzt auf Einfachheit, gute Performance und eine kleine, leicht verständliche API, die sich besonders für Microservices, Prototypen und kleine bis mittelgroße Webanwendungen eignet.
+[link](https://www.slf4j.org)
 
-## Was ist Javalin?
-Javalin basiert auf dem Jetty-Webserver und versucht, Entwickler durch eine flache API-Oberfläche schnell produktiv zu machen. Statt komplexer Vererbungsstrukturen oder vieler Konfigurationen bietet Javalin eine direkte, pragmatische Herangehensweise an Routing, Middleware und API-Dokumentation.
+slf4j ist eine Schnittstelle für verschiedene Logging-Frameworks (z.B. Log4j, java.util.logging, Logback)
+ermöglicht es, das Logging-Framework zur Laufzeit auszuwählen, ohne den Code zu ändern
+bietet eine einheitliche API für das Logging, unabhängig vom verwendeten Framework
+unterstützt verschiedene Log-Level (TRACE, DEBUG, INFO, WARN, ERROR)
+ermöglicht die Verwendung von Platzhaltern in Log-Nachrichten (z.B. `logger.info("User {} logged in", username);`)
+bietet Unterstützung für Mapped Diagnostic Context (MDC) und Nested Diagnostic Context (NDC) für die Kontextualisierung von Log-Nachrichten
+ermöglicht die Integration mit verschiedenen Build-Tools (z.B. Maven, Gradle) und Logging-Frameworks (z.B. Logback, Log4j)
+ist weit verbreitet und wird von vielen Java-Projekten verwendet, um eine flexible und einheitliche Logging-Lösung zu bieten.
 
-## Vorteile von Javalin
 
-- Einfachheit: Sehr geringer Einstieg: keine abstrakten Basisklassen oder umfangreiche Konfigurationen nötig.
-- Leichtgewichtig & performant: Kleine Codebasis, direkte Nutzung von Jetty für gute Laufzeit-Eigenschaften.
-- Flexibilität: Synchroner Standardbetrieb mit einfacher Möglichkeit zur asynchronen Verarbeitung.
-- OpenAPI-Integration: Unterstützung für OpenAPI/Swagger zur einfachen API-Dokumentation.
-
-## Beispiel: Einfacher Java‑Webserver
-Das folgende Minimalbeispiel zeigt, wie man mit wenigen Zeilen einen HTTP-Endpunkt bereitstellt:
-
-```java
-import io.javalin.Javalin;
-
-public class Main {
-    static void main(String[] args) {
-        var app = Javalin.create(config -> {
-            config.routes.get("/", ctx -> ctx.result("Hello World"));
-        }).start(7070);
-        System.out.println("Server started on port 7070 ...");
-        System.out.println("Press Ctrl+C to stop the server.");
-        System.out.println("Visit http://localhost:7070 to see the result.");
-    }
-}
-```
-
-Dieses Beispiel startet einen Server auf Port 7070 und beantwortet GET-Anfragen an `/` mit dem Text "Hello World".
-
+## Glossar
+- **Logging**: Das Aufzeichnen von Informationen über die Ausführung eines Programms, um Fehler zu diagnostizieren oder den Betrieb zu überwachen.
+- **SLF4J**: Simple Logging Facade for Java, eine Schnittstelle für verschiedene Logging-Frameworks.
+- **Log-Level**: Verschiedene Stufen der Log-Nachrichten (z.B. TRACE, DEBUG, INFO, WARN, ERROR), die die Wichtigkeit der Nachricht angeben.
+- **Platzhalter**: Eine Möglichkeit, Log-Nachrichten mit variablen Daten zu formatieren, z.B. `logger.info("User {} logged in", username);`.
+- **MDC (Mapped Diagnostic Context)**: Ein Mechanismus, um zusätzliche Informationen in Log-Nachrichten zu speichern, die für die Diagnose von Problemen nützlich sein können.
+- **NDC (Nested Diagnostic Context)**: Ein Mechanismus, um verschachtelte Kontextinformationen in Log-Nachrichten zu speichern, z.B. bei der Verarbeitung von Anfragen in einem Webserver.
 
 ## Versionen
 
 ### Java
 - Java Version: 21 (LTS)
 - Empfehlung: Verwende Java 21 oder höher, um die neuesten Sprachfeatures und Verbesserungen zu nutzen.
-
-### Javalin 7.2.2
-- Aktuelle Version: 7.2.2 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io
-
+- 
+### slf4j-simple
+- Aktuelle Version: 2.0.17 (Stand: Juni 2024)
+- Weitere Informationen und Updates findest Du auf der offiziellen SLF4J-Website: https://www.slf4j.org
 
 ## Verwendete Abhängigkeiten
-
 In diesem Projekt werden folgende Bibliotheken verwendet (siehe auch `pom.xml`). Hier ist eine kurze Erklärung, warum sie gebraucht werden und welche Version konkret eingesetzt ist.
 
-- `io.javalin:javalin:7.2.2`
-    - Zweck: Leichtgewichtiges Web-Framework zum schnellen Erstellen von HTTP-Endpunkten und REST-APIs. Javalin bietet eine einfache API für Routing, Middleware, Request/Response-Handling und Serverseitiges Rendering.
-    - Warum diese Version: 7.2.2 ist die zum Projektzeitpunkt verwendete stabile Version. Javalin entwickelt sich aktiv weiter — bei Updates auf neue Major-Releases auf Breaking-Changes achten.
-    - Hinweise: Javalin nutzt intern einen Servlet-Container (standardmäßig Jetty) und ist für Lern- und Demo-Projekte ideal.
-
+- `org.slf4j:slf4j-simple:2.0.17`
+    - Zweck: SLF4J ist eine Logging-Abstraktion; `slf4j-simple` ist eine einfache, konsolenorientierte Implementierung von SLF4J. Sie schreibt Logs direkt auf stdout/stderr und ist einfach zu konfigurieren.
+    - Warum diese Version: 2.0.17 passt zur SLF4J-API-Version und ist für Demo- und Entwicklungszwecke ausreichend. In Produktionsprojekten empfiehlt sich eine robustere Implementierung (z. B. Logback) und eine konfigurierte Logging-Policy.
 ```xml
 <dependency>
-    <groupId>io.javalin</groupId>
-    <artifactId>javalin</artifactId>
-    <version>7.2.2</version>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>2.0.17</version>
 </dependency>
-```
-
-
-
-## Schnellstart
-- Mit Deiner IDE: Main-Klasse (`com.ebouprime.Main`) ausführen.
-- Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
-
-```bash
-mvn compile exec:java -Dexec.mainClass="com.ebouprime.Main"
 ```
