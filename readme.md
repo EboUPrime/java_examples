@@ -226,7 +226,7 @@ Kurz: Diese Abhängigkeiten sind absichtlich minimal gehalten — sie reichen f�
 - Mit Maven (falls `exec-maven-plugin` konfiguriert ist):
 
 Wie das Tutorial funktioniert
-1) Öffne `/example.html` im Browser.
+1) Öffne `http://localhost:7070/example.html` im Browser.
 2) Im Tutorial‑Abschnitt wählst Du:
     - Methode (GET/POST/PUT/PATCH/DELETE)
     - ID (oder die Option, eine existierende ID automatisch zu wählen)
