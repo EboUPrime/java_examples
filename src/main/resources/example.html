@@ -32,11 +32,6 @@
         .result{margin-top:10px;padding:12px;background:#fbfdff;border-radius:8px;border:1px dashed rgba(12,18,34,0.04);white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;font-size:13px;color:#12202b}
         .explain{margin-top:8px;font-size:13px;color:var(--muted);white-space:pre-wrap}
         .meta{font-size:13px;color:var(--muted);margin-top:12px}
-        .status-badge{display:inline-block;padding:6px 8px;border-radius:999px;font-weight:600;font-size:12px;color:#fff}
-        .status-200{background:var(--success)}
-        .status-201{background:#0b7bd6}
-        .status-4xx{background:var(--danger)}
-        .status-5xx{background:#8a1538}
         footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
     </style>
 </head>
@@ -145,7 +140,7 @@
 </div>
 
 <script>
-    // Hilfsfunktionen
+    // Helpers to fetch existing users and predict expected status codes based on server rules
     async function fetchUsers() {
         try {
             const res = await fetch('/users');
@@ -159,8 +154,8 @@
     }
 
     function explainPredicted(method, url, payload, users, id, fieldsPresent) {
-        // Liefert eine Vorhersage (status, reason) basierend auf den bekannten Server-Regeln
-        // Regeln (aus Server-Code):
+        // returns a prodict object { status: number, reason: string } based on method, url, payload, users, id, fieldsPresent
+        // roles from Main.java:
         // GET /user?id -> if invalid id => 400; if id exists => 200; else 404
         // POST /user -> if missing fields => 400; if id exists => 409; else 201
         // PUT /user/{id} -> if missing name/email => 400; if id exists => 200 else 201
