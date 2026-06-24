@@ -168,15 +168,15 @@ Dieses Projekt demonstriert HTTP‑Statuscodes mit einer kleinen Javalin‑REST�
 
 ### Javalin 7.2.2
 - Aktuelle Version: 7.2.2 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: https://javalin.io
-- 
+- Weitere Informationen und Updates findest Du auf der offiziellen Javalin-Website: [javalin](https://javalin.io)
+
 ### slf4j-simple
 - Aktuelle Version: 2.0.17 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen SLF4J-Website: https://www.slf4j.org
+- Weitere Informationen und Updates findest Du auf der offiziellen SLF4J-Website: [slf4j](https://www.slf4j.org)
 
 ### Jackson Databind
 - Aktuelle Version: 2.21.2 (Stand: Juni 2024)
-- Weitere Informationen und Updates findest Du auf der offiziellen Jackson-Website: https://www.tutorialspoint.com/jackson/jackson_data_binding.htm
+- Weitere Informationen und Updates findest Du auf der offiziellen Jackson-Website: [Jackson Databind](https://www.tutorialspoint.com/jackson/jackson_data_binding.htm)
 
 
 
