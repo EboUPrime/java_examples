@@ -7,6 +7,7 @@ import io.javalin.config.RoutesConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 class HttpResponse {
@@ -66,7 +67,9 @@ class HttpErrorResponse {
 public class Main {
     List<User> list = new ArrayList<>();
     {
-        list.add(new User(1, "ebouprime", "info@ebouprime.com"));
+        list.add(new User(1, "John Doe", "john.doe@example.com", "admin"));
+        list.add(new User(2, "Jane Smith", "jane.smith@example.com", "user"));
+        list.add(new User(3, "Alice Johnson", "alice.johanson@example.com", "user"));
     }
 
     public String initializeHomePage() {
@@ -130,6 +133,29 @@ public class Main {
 
 
 
+        homepage.append("<section class=\"meta\">");
+        homepage.append("<h3>Erweiterte Beispiele für erfolgreiche GET-Anfragen</h3>");
+        homepage.append("<h4>Query-Parameter</h4>");
+        homepage.append("<ul>");
+        homepage.append("<li>");
+        homepage.append("Benutzer nach Name und E-Mail abrufen (200)");
+        homepage.append("<br>");
+        homepage.append("<a target=_blank href=\"/user?name=John Doe&email=john.doe@example.com\">GET /user?name=John Doe&email=john.doe@example.com</a>");
+        homepage.append("</li>");
+        homepage.append("</ul>");
+
+        homepage.append("<h4>Path-Parameter</h4>");
+        homepage.append("<ul>");
+        homepage.append("<li>");
+        homepage.append("Benutzer nach ID und Rolle abrufen (200)");
+        homepage.append("<br>");
+        homepage.append("<a target=_blank href=\"/user/admin\">GET /user/admin</a>");
+        homepage.append("</li>");
+        homepage.append("</ul>");
+
+        homepage.append("</section>");
+
+
         homepage.append("</div>\n</body>\n</html>");
 
         return homepage.toString();
@@ -152,14 +178,33 @@ public class Main {
         // GET /user?id=... or redirects to /users
         routes.get("/user", ctx -> {
             String idQ = ctx.queryParam("id");
-            if (idQ == null) {
-                HttpErrorResponse errorResponse = new HttpErrorResponse(400, "Missing id parameter");
+            String nameQ = ctx.queryParam("name");
+            String emailQ = ctx.queryParam("email");
+
+            if (idQ == null && nameQ == null && emailQ == null) {
+                HttpErrorResponse errorResponse = new HttpErrorResponse(400, "Missing parameters");
                 ctx.status(400).json(errorResponse);
                 return;
             }
-            try {
-                int iid = Integer.parseInt(idQ);
-                User found = list.stream().filter(u -> u.getId() == iid).findFirst().orElse(null);
+
+            if (idQ != null) {
+                try {
+                    int iid = Integer.parseInt(idQ);
+                    User found = list.stream().filter(u -> u.getId() == iid).findFirst().orElse(null);
+                    if (found == null) {
+                        HttpErrorResponse errorResponse = new HttpErrorResponse(404, "User not found");
+                        ctx.status(404).json(errorResponse);
+                    } else {
+                        ctx.contentType("application/json; charset=utf-8");
+                        HttpResponse response = new HttpResponse(200, List.of(found));
+                        ctx.status(200).json(response);
+                    }
+                } catch (NumberFormatException nfe) {
+                    HttpErrorResponse errorResponse = new HttpErrorResponse(400, "Invalid id parameter");
+                    ctx.status(400).json(errorResponse);
+                }
+            } else if (nameQ != null && emailQ != null) {
+                User found = list.stream().filter(u -> u.getName().equalsIgnoreCase(nameQ) && u.getEmail().equalsIgnoreCase(emailQ)).findFirst().orElse(null);
                 if (found == null) {
                     HttpErrorResponse errorResponse = new HttpErrorResponse(404, "User not found");
                     ctx.status(404).json(errorResponse);
@@ -168,24 +213,23 @@ public class Main {
                     HttpResponse response = new HttpResponse(200, found);
                     ctx.status(200).json(response);
                 }
-            } catch (NumberFormatException nfe) {
-                HttpErrorResponse errorResponse = new HttpErrorResponse(400, "Invalid id parameter");
+            } else {
+                HttpErrorResponse errorResponse = new HttpErrorResponse(400, "Invalid parameters");
                 ctx.status(400).json(errorResponse);
             }
         });
 
-        // GET /user/{id} (Path Parameter)
-        routes.get("/user/{id}", ctx -> {
-            String idPath = ctx.pathParam("id");
+        // GET /user/{id}/{role} (Path Parameter)
+        routes.get("/user/{role}", ctx -> {
+            String rolePath = ctx.pathParam("role");
             try {
-                int iid = Integer.parseInt(idPath);
-                User found = list.stream().filter(u -> u.getId() == iid).findFirst().orElse(null);
-                if (found == null) {
+                List<User> founds = list.stream().filter(u -> u.getRole().equals(rolePath)).collect(Collectors.toList());
+                if (founds == null || founds.isEmpty()) {
                     HttpErrorResponse errorResponse = new HttpErrorResponse(404, "User not found");
                     ctx.status(404).json(errorResponse);
                 } else {
                     ctx.contentType("application/json; charset=utf-8");
-                    HttpResponse response = new HttpResponse(200, found);
+                    HttpResponse response = new HttpResponse(200, founds);
                     ctx.status(200).json(response);
                 }
             } catch (NumberFormatException nfe) {

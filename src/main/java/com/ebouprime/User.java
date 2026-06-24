@@ -4,15 +4,17 @@ public class User {
     private Integer id;
     private String name;
     private String email;
+    private String role;
 
     // Default-Konstruktor für JSON-Deserialisierung
     public User() {
     }
 
-    public User(Integer id, String name, String email) {
+    public User(Integer id, String name, String email, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -39,13 +41,21 @@ public class User {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
-
