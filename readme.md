@@ -246,7 +246,7 @@ Beispiel‑Szenarien
 
 ## Keywords
 
-REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging Tutorial API Endpoint Ressourcen Zustandslosigkeit Statuscode-Erklärung
+REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging API Endpoint Ressourcen Zustandslosigkeit Tutorial
 
 ## Meta‑Description
 
