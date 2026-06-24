@@ -12,18 +12,6 @@
   - 200 OK: Erfolgreiche Abfrage, Daten werden zurückgegeben.
   - 404 Not Found: Benutzer mit der angegebenen ID existiert nicht.
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## Fazit
 
 REST-APIs sind der Grundbaustein moderner Webanwendungen und Microservices. Durch klare Konventionen, HTTP-Standards und Zustandslosigkeit sind sie leicht verständlich, skalierbar und gut wartbar. In Kombination mit Frameworks wie **Javalin** lassen sich RESTful APIs in Java schnell und übersichtlich umsetzen.
@@ -117,10 +105,7 @@ Beispiel‑Szenarien
 ---
 
 ## Keywords
-
-REST HTTP HTTP-Statuscodes Javalin Java CRUD GET POST PUT PATCH DELETE JSON Jackson SLF4J Logging API Endpoint Ressourcen Zustandslosigkeit Tutorial
+REST APIs Javalin Java Benutzerverwaltung HTTP GET Methoden Statuscodes API-Dokumentation Benutzerliste Benutzerdetails Fehlerbehandlung Datenabruf
 
 ## Meta‑Description
-
-Interaktives, browserbasiertes Tutorial, das HTTP‑Methoden und Statuscodes erklärt – mit konkreten /user‑Beispielen (GET/POST/PUT/PATCH/DELETE), vorhergesagtem Status, tatsächlichem Response‑Body und schrittweiser Begründung.
-
+Ein einfaches REST-API-Projekt mit Javalin zur Demonstration von HTTP-Methoden und Statuscodes. Enthält Beispiele für Benutzerverwaltung und Fehlerbehandlung.
